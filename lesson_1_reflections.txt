@@ -1,0 +1,74 @@
+
+Lesson 1 - Reflections
+
+Q: How did viewing a diff between two versions of a file help you see the bug that was introduced?
+
+It listed lines in the files that are different.
+In this lession, we used diff on Mac and fc on Windows to list differences between files. I was aware of these two programs and have used both.
+
+I need to learn about the specifics of Git and GitHub.
+So I'm waiting patiently for that part of this course.
+
+Q: How could having easy access to the entire history of a file make you a more efficient programmer in the long term?
+
+It could help me to locate previous versions of a file should I need to retrieve something from a previous version. I learned that the following programs have version control: Dropbox, Google Docs, Wikipedia.
+
+As a programmer, when would you want to have a version of your code saved?
+  a. At regular intervales, e.g. every hour
+     -gives fined grained detail, maybe too fine (“not much reason for this choice”)
+  b. When a large enough change is made, e.g. 50 changed lines
+     -might get versions that are not usable 
+      especially if there is a long time between edits
+  c. When there is a long pause in editing
+     -when there is a long pause not related to writing code,
+      e.g. when you take a day or two off or you are pulled to a meeting or call
+  d. When you choose to save a version
+     -downside is not saving enough or too often but upside is flexibility
+
+Git was designed in 2005 by Linus Torvalds, the creator of Linux.
+A Git is an unpleasant person in British slang.
+Git was designed with code in mind.
+CVS and Subversion were also designed with code in mind.
+Mercurial is another Version Control System (VCS), abbrev. HG, which is similar to Git.
+Saved versions are called commits.
+Commits require you to write a comment describing the change.
+Concepts
+  -VCS
+  -Example VCS: Dropbox, Google Docs, Wikipedia, Git, SVN (type of VCS)
+  -Commit (part of Git) - a saved version with a descriptive comment
+  -git log provides a history of the commits
+     -git log --stat  - indicates which files have changed & how much
+  -git diff <commit ID 1> <commit ID 2>  - compares two versions (operates on commits)
+  -Perform commits for each logical change
+
+Q: What do you think are the pros and cons of manually choosing when to create a commit, like you do in Git, vs having versions automatically saved, like Google Docs does?
+
+Downside is not saving enough, the upside is saving too often, but one can get the hang of the just right time to commit with practice.
+
+Commits with multiple files = repository
+
+Q: Why do you think some version control systems, like Git, allow saving multiple files in one commit, while others, like Google Docs, treat each file separately?
+
+Some VCS treat each file separately, but when groups of two or more files are dependent then it is best to allow multiple files to be saved for each commit.
+
+git clone <url>   - copies an entire repository at the address specified by <url>
+
+Q: How can you use the commands git log and git diff to view the history of files?
+
+Use git log to get a list of commits with IDs, use get diff to compare two commits. And use get log --stat to get the number of insertions and deletions.
+
+git checkout - not equivalent to an SVN checkout!
+
+git checkout <commit ID> - restores a previous version/commit
+
+Incidentally, I learned that git checkout master restores to the original state.
+
+Q: How might using version control make you more confident to make changes that could break something?
+
+Because one can always get back to any previous version without the breakage.
+
+Q: Now that you have your workspace set up, what do you want to try using Git for?
+
+I need to use Git for version control of most of my software projects, especially any TensorFlow projects. I will need to use it for the Udacity Deep Learning course.
+
+
