@@ -1,0 +1,43 @@
+
+Lesson 2 - Reflections
+
+Q: What happens when you initialize a repository? Why do you need to do it?
+
+When a repository is initialized a .git directory is created. This directory includes support files for maintaining the repository.
+
+The following sequence of steps gets a repository with N tracked files setup properly.
+  1. Create directory containing the N files to be tracked.
+  2. cd into the new directory.
+  3. Use ‘git init’ to initialize the repository.
+  4. Use ‘git add <track file names>’ to add the N files to the repository.
+     The instructors suggest adding one file at a time to be consistent with
+     their philosophy of one logical change per commit, but I don’t think this
+     is necessary or efficient.
+  5. Use ‘git commit -m <description of change>’ to commit or simply
+     ‘git commit’ to invoke the core editor to type a more lengthy description.
+
+I tried to use TextEdit as the default editor but it activated all existing instances and git did not return after I saved the file. So I ended up using nano instead which is like a mini emacs.
+
+
+Q: How is the staging area different from the working directory and the repository?
+What value do you think it offers?
+
+First I need to resolve the following question in my mind which is not explicitly answered in the lesson. Is the staging area a directory or a subdirectory or a memory area or just conceptual or something else entirely? Reviewing the video that introduces the staging area concept and examining the files in the working directory after adding files to the staging area reveals that the staging area is conceptual and it resides in the git program’s memory.
+
+So while the staging area is a concept that actually resides in the git program’s memory, the working directory holds the tracked files and the repository directory.
+
+If one adds a file to the staging area but then wants to remove it, one has to use the command ‘git rm --cached <file>’. If one uses ‘git rm <file>’ something else happens. One can also use ‘git reset’ to unstage everything.
+
+Q: How can you use the staging area to make sure you have one commit per logical
+change?
+
+Q: What are some situations when branches would be helpful in keeping your history
+organized? How would branches help?
+
+Q: How do the diagrams help you visualize the branch structure?
+
+Q: What is the result of merging two branches together? Why do we represent it in
+the diagram the way we do?
+
+Q: What are the pros and cons of Gitâ€™s automatic merging vs. always doing merges
+manually?
