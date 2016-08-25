@@ -16,8 +16,11 @@ The following sequence of steps gets a repository with N tracked files setup pro
   5. Use ‘git commit -m <description of change>’ to commit or simply
      ‘git commit’ to invoke the core editor to type a more lengthy description.
 
-I tried to use TextEdit as the default editor but it activated all existing instances and git did not return after I saved the file. So I ended up using nano instead which is like a mini emacs.
+I tried to use TextEdit as the default editor but it activated all existing instances and git did not return after I saved the file. So I ended up using nano instead which is like a mini emacs. The command to use nano as the core editor is:
 
+git config --global core.editor '/usr/bin/nano --tempfile'
+
+where the ‘--tempfile’ option is used to prevent nano from asking for the file name.
 
 Q: How is the staging area different from the working directory and the repository?
 What value do you think it offers?
@@ -31,13 +34,53 @@ If one adds a file to the staging area but then wants to remove it, one has to u
 Q: How can you use the staging area to make sure you have one commit per logical
 change?
 
+The command ‘git diff’ with no arguments compares the working directory and the staging area. The command ‘git diff --staged’ compares the staging area to the previous commit. These commands can be used to ensure the changes correspond to one logical change per commit.
+
 Q: What are some situations when branches would be helpful in keeping your history
 organized? How would branches help?
 
+Branches are labeled paths through the change tree.
+The main branch is called ‘master’.
+Use ‘git branch’ to view existing branches.
+Use ‘git branch <branch name>’ to create a new branch.
+To make the code point to the new branch, use ‘git checkout <branch name>’.
+The command ‘git checkout -b <new branch name>’ is equivalent to the sequence
+  git branch <new branch name>
+  git checkout <new branch name>
+The end (most recent version) of a branch is called the tip of the branch. 
+When one wants to try changing the code to create a new experimental feature, a branch is a good way to do it. Branching is also useful when one wants to maintain a different version of the code, such as a French version or a version that uses a different method. One can think of branching as “context switching.” Branches may have unique or experimental features or may contain code not yet ready for production.
+
 Q: How do the diagrams help you visualize the branch structure?
+
+Use ‘git log --oneline’ to see a list of commits with each on one line.
+Use ‘git log --graph <branch 1> <branch 2> ... <branch n>’ to see when branches were added and merged.
+
+Drawing diagrams of the change tree branch structure helps one keep track of the various versions and change paths.
 
 Q: What is the result of merging two branches together? Why do we represent it in
 the diagram the way we do?
 
-Q: What are the pros and cons of Gitâ€™s automatic merging vs. always doing merges
+Use ‘git show <git id>’ to limit the diff to the parent(s) of <git id>.
+A merge combines two branches using the discussed “automatic merge” strategy.
+
+One can delete a branch label after a merge using ‘git branch -d <branch name>’
+
+Q: What are the pros and cons of Git’s automatic merging vs. always doing merges
 manually?
+
+Git’s automatic merging does not alway work because its strategy does not know how to resolve some types of conflicts, i.e. if there are changes to a common section of code.
+
+In general, it is a good practice if you make a branch, either an experimental branch or to work on a new feature, you want to periodically merge master into that branch. This is because master usually contains the official version of the code, and it’s common to want experimental changes to include all of the changes to master.
+
+To do this, first checkout the experimental branch using ‘git branch <branch name>’ and then run ‘git merge master <branch name>’. If changes were made in the same section of the code, then git will provide the following alert:
+
+  CONFLICT (content): Merge conflict in game.js 
+  Automatic merge failed; fix conflicts and then commit the result.
+
+The file containing the code will now have 3 sections:
+  top section    - contains the current modifications
+  middle section - contains the code in the common ancestors
+                   (the original code that both branches modified)
+  lower section  - contains the code in the master branch
+
+You will then have to manually resolve conflicts and remove all of git’s comment lines. Then add the file(s) to the staging area and commit the changes.
